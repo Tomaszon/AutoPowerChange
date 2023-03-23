@@ -1,0 +1,12 @@
+<QueryList>
+	<Query Id="0" Path="Security">
+		<Select Path="Security"> 
+			*[System[Provider[@Name='Microsoft-Windows-Security-Auditing'] and (EventID=4688 or EventID=4689)]]
+			and 
+			(
+				*[EventData[Data[@Name='NewProcessName' or @Name='ProcessName']='C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe']]
+				or 
+				*[EventData[Data[@Name='NewProcessName' or @Name='ProcessName']='C:\Program Files\WindowsApps\Microsoft.WindowsCalculator_11.2210.0.0_x64__8wekyb3d8bbwe\CalculatorApp.exe'
+			)       </Select>
+	</Query>
+</QueryList>

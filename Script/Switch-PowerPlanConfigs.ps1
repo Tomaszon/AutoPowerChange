@@ -16,6 +16,14 @@ $highPowerTickInterval = 15
 #TODO get real process names
 $highPowerPlanProcessRegexes = "Minecraft", "WoT"
 $balancedPowerPlanProcessRegexes = "devenv", "code"
+
 $defaultNightScreenBrightness = 10
 $defaultDayScreenBrightness = 50
+
 $daylightTime = 8, 17
+
+$taskName = "ScriptGeneratedPowerPlanAutoChange"
+$taskTemplatePath = "..\Task\PowerPlanAutoChangeJobTemplate.xml"
+$taskWatchListPath = "..\Task\processes.json"
+
+$queryWrapper = "*[EventData[Data[@Name='NewProcessName' or @Name='ProcessName']='{0}']]"
