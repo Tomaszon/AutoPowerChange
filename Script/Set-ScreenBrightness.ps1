@@ -3,7 +3,7 @@
 function Set-ScreenBrightness {
 	$time = [int](Get-Date -Format "HH")
 	
-	$brightness = if ($time -gt $daylightTime[0] -and $time -lt $daylightTime[1]) {
+	$brightness = if ($time -ge $daylightTime[0] -and $time -lt $daylightTime[1]) {
 		$defaultDayScreenBrightness
 	}
 	else {

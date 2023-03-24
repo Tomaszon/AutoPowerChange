@@ -6,24 +6,16 @@ $highPowerImageName = "fast"
 $balancedPowerImageName = "med"
 $lowPowerImageName = "slow"
 
-$toastHeader = "AC/DC change detected"
+$toastHeader = "Power mode changing..."
 $toastContent = "Power mode changed to '{0}' :3"
 
-$lowPowerTickInterval = 300
-$balancedPowerTickInterval = 60
-$highPowerTickInterval = 15
-
-#TODO get real process names
-$highPowerPlanProcessRegexes = "Minecraft", "WoT"
-$balancedPowerPlanProcessRegexes = "devenv", "code"
-
 $defaultNightScreenBrightness = 10
-$defaultDayScreenBrightness = 50
+$defaultDayScreenBrightness = 40
 
-$daylightTime = 8, 17
+$daylightTime = 8, 18
 
 $taskName = "ScriptGeneratedPowerPlanAutoChange"
 $taskTemplatePath = "..\Task\PowerPlanAutoChangeJobTemplate.xml"
-$taskWatchListPath = "..\Task\processes.json"
+$taskWatchListPath = "..\Resources\processes.json"
 
 $queryWrapper = "*[EventData[Data[@Name='NewProcessName' or @Name='ProcessName']='{0}']]"

@@ -7,8 +7,16 @@ function Get-PlanName() {
 		$result = $balancedPowerPlanName 
 	}
 	
+	$jsonObject = Get-Content $taskWatchListPath | Out-String | ConvertFrom-Json
+	
+	$highPowerPlanProcesses = @()
+	
+	foreach ($property in $jsonObject.PSObject.Properties) {
+		$highPowerPlanProcesses += $property.Name
+	}
+
 	foreach ($process in Get-Process) {
-		foreach ($regex in $highPowerPlanProcessRegexes) {
+		foreach ($regex in $highPowerPlanProcesses) {
 			if ($process.ProcessName -match $regex) {
 				return $highPowerPlanName
 			}

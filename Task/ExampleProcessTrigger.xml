@@ -1,9 +1,0 @@
-<QueryList>
-  <Query Id="0" Path="Security">
-    <Select Path="Security"> 
-      *[System[Provider[@Name='Microsoft-Windows-Security-Auditing'] and (EventID=4688 or EventID=4689)]]
-      and
-      *[EventData[Data[@Name='NewProcessName' or @Name='ProcessName']='C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe']]
-    </Select>
-  </Query>
-</QueryList>

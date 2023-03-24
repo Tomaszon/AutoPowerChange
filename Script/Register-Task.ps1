@@ -1,14 +1,14 @@
 . (Join-Path $PSScriptRoot .\Switch-PowerPlanConfigs.ps1)
 
 function Register-Task {
-	$hashTable = Get-Content $taskWatchListPath | Out-String | ConvertFrom-Json -AsHashTable
-	
-	$apps = @()
-	foreach ($key in $hashTable.Keys) {
-		$apps += $queryWrapper.Replace("{0}", $hashTable[$key])
+	$hashTable = Get-Content $taskWatchListPath | Out-String | ConvertFrom-Json
+
+	foreach ($property in $hashTable.PSObject.Properties) {
+		$formatted = $queryWrapper.Replace('{0}', $property.Value)
+		$apps += "$formatted or " 
 	}
 
-	$query = Join-String -InputObject $apps -Separator " or "
+	$query = $apps.TrimEnd(" or ")
 
 	$template = (Get-Content $taskTemplatePath | Out-String).Replace("{0}", $query)
 
