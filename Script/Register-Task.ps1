@@ -10,7 +10,11 @@ function Register-Task {
 
 	$query = $apps.TrimEnd(" or ")
 
-	$template = (Get-Content $taskTemplatePath | Out-String).Replace("{0}", $query)
+	$user = Get-LocalUser -name "offic"
+
+	$sid = $user.Sid.Value
+
+	$template = (Get-Content $taskTemplatePath | Out-String).Replace("{0}", $query).Replace("{1}", $sid)
 
 	Register-ScheduledTask -TaskName $taskName -Xml $template -Force
 }

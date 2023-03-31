@@ -1,6 +1,6 @@
 $highPowerPlanName = "Powa"
 $balancedPowerPlanName = "Balanced"
-$lowPowerPlanName = "Saver"
+$lowPowerPlanName = "Balanced"
 
 $highPowerImageName = "fast"
 $balancedPowerImageName = "med"

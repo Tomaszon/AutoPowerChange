@@ -3,26 +3,26 @@
 . (Join-Path $PSScriptRoot .\Set-ScreenBrightness.ps1)
 . (Join-Path $PSScriptRoot .\Register-Task.ps1)
 
-try {	
+try {
 	$planName = Get-PlanName
-	
+
 	$plan = Get-CimInstance -Name root\cimv2\power -Class win32_PowerPlan -Filter "ElementName = '$planName'"
-	
+
 	$guid = $plan.InstanceID.Replace("Microsoft:PowerPlan\{", "").Replace("}", "")
-	
+
 	$previousPlan = Get-CimInstance -Name root\cimv2\power -Class win32_PowerPlan -Filter IsActive=True
-	
+
 	$previousGuid = $previousPlan.InstanceID.Replace("Microsoft:PowerPlan\{", "").Replace("}", "")
-	
+
 	if ($guid -ne $previousGuid) {
 		$planName = Switch-PowerPlan $guid $planName
-		
+
 		Start-Sleep 2
-		
+
 		Set-ScreenBrightness
 	}
-			
-	# Register-Task
+
+	Register-Task
 }
 catch {
 	Write-Host($_)
