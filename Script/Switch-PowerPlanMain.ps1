@@ -7,11 +7,11 @@ if ($enabled) {
 	try {
 		$planName = Get-PlanName
 
-		$plan = Get-CimInstance -Name root\cimv2\power -Class win32_PowerPlan -Filter "ElementName = '$planName'"
+		$plan = Get-CimInstance -Name "root\cimv2\power" -Class "win32_PowerPlan" -Filter "ElementName = '$planName'"
 
 		$guid = $plan.InstanceID.Replace("Microsoft:PowerPlan\{", "").Replace("}", "")
 
-		$previousPlan = Get-CimInstance -Name root\cimv2\power -Class win32_PowerPlan -Filter IsActive=True
+		$previousPlan = Get-CimInstance -Name "root\cimv2\power" -Class "win32_PowerPlan" -Filter "IsActive=True"
 
 		$previousGuid = $previousPlan.InstanceID.Replace("Microsoft:PowerPlan\{", "").Replace("}", "")
 

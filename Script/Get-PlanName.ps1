@@ -3,7 +3,7 @@
 function Get-PlanName() {
 	$result = $batteryPowerPlanName
 	
-	if ((Get-WmiObject -Class BatteryStatus -Namespace root\wmi).PowerOnLine) { 
+	if ((Get-WmiObject -Class "BatteryStatus" -Namespace "root\wmi").PowerOnLine) { 
 		$result = $pluggedInPowerPlanName 
 	}
 	

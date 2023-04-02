@@ -1,15 +1,18 @@
+$userName = ((Get-WMIObject -Class "Win32_ComputerSystem").UserName -Split "\\")[1]
+
 $enabled = $true
 
 $highPowerPlanName = "Powa"
 $pluggedInPowerPlanName = "Balanced"
 $batteryPowerPlanName = "Balanced"
 
-$highPowerImageName = "fast"
-$balancedPowerImageName = "med"
-$lowPowerImageName = "slow"
+$highPowerPlanImageName = "high"
+$pluggedInPowerPlanImageName = "med"
+$batteryPowerPlanImageName = "med"
 
 $toastHeader = "Power mode changing..."
 $toastContent = "Power mode changed to '{0}' :3"
+$toastIconFolder = "C:\Users\$userName\Documents\GitHub\AutoPowerChange\Resources"
 
 $defaultNightScreenBrightness = 10
 $defaultDayScreenBrightness = 40

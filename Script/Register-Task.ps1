@@ -10,7 +10,7 @@ function Register-Task {
 
 	$query = $apps.TrimEnd(" or ")
 
-	$user = Get-LocalUser -name "offic"
+	$user = Get-LocalUser -name $userName
 
 	$sid = $user.Sid.Value
 
