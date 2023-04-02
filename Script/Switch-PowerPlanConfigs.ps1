@@ -1,3 +1,5 @@
+$enabled = $true
+
 $highPowerPlanName = "Powa"
 $pluggedInPowerPlanName = "Balanced"
 $batteryPowerPlanName = "Balanced"
@@ -12,7 +14,7 @@ $toastContent = "Power mode changed to '{0}' :3"
 $defaultNightScreenBrightness = 10
 $defaultDayScreenBrightness = 40
 
-$daylightTime = 8, 19
+$daylightTime = 8, 18
 
 $taskName = "ScriptGeneratedPowerPlanAutoChange"
 $taskTemplatePath = "..\Task\PowerPlanAutoChangeJobTemplate.xml"
