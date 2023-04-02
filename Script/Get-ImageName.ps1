@@ -3,8 +3,8 @@
 function Get-ImageName($planName) {
 	$result = switch ($planName) {
 		$highPowerPlanName { $highPowerImageName }
-		$balancedPowerPlanName { $balancedPowerImageName }
-		$lowPowerPlanName { $lowPowerImageName }
+		$pluggedInPowerPlanName { $balancedPowerImageName }
+		$batteryPowerPlanName { $lowPowerImageName }
 	}
 
 	return $result

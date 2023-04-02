@@ -1,10 +1,10 @@
 . (Join-Path $PSScriptRoot .\Switch-PowerPlanConfigs.ps1)
 
 function Get-PlanName() {
-	$result = $lowPowerPlanName
+	$result = $batteryPowerPlanName
 	
 	if ((Get-WmiObject -Class BatteryStatus -Namespace root\wmi).PowerOnLine) { 
-		$result = $balancedPowerPlanName 
+		$result = $pluggedInPowerPlanName 
 	}
 	
 	$jsonObject = Get-Content $taskWatchListPath | Out-String | ConvertFrom-Json
