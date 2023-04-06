@@ -1,6 +1,8 @@
 . (Join-Path $PSScriptRoot .\Switch-PowerPlan.ps1)
 . (Join-Path $PSScriptRoot .\Switch-PowerPlanConfigs.ps1)
 . (Join-Path $PSScriptRoot .\Set-ScreenBrightness.ps1)
+. (Join-Path $PSScriptRoot .\Get-ScreenBrightness.ps1)
+. (Join-Path $PSScriptRoot .\Get-PlanName.ps1)
 . (Join-Path $PSScriptRoot .\Register-Task.ps1)
 
 if ($enabled) {
@@ -16,13 +18,17 @@ if ($enabled) {
 		$previousGuid = $previousPlan.InstanceID.Replace("Microsoft:PowerPlan\{", "").Replace("}", "")
 
 		if ($guid -ne $previousGuid) {
-			$planName = Switch-PowerPlan $guid $planName
+			$brightness = Get-ScreenBrightness
+
+			Switch-PowerPlan $guid $planName
 			
 			Start-Sleep 2
 			
-			Set-ScreenBrightness
+			Set-ScreenBrightness $brightness
 		}
 		
+		Set-ExecutionPolicy $executionPolicyAfterExecution
+
 		Register-Task
 	}
 	catch {

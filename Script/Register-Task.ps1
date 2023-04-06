@@ -5,10 +5,10 @@ function Register-Task {
 
 	foreach ($property in $hashTable.PSObject.Properties) {
 		$formatted = $queryWrapper.Replace('{0}', $property.Value)
-		$apps += "$formatted or " 
+		$apps += "$formatted`r`n        or`r`n        " 
 	}
 
-	$query = $apps.TrimEnd(" or ")
+	$query = $apps.TrimEnd("`r`n        or`r`n        ")
 
 	$user = Get-LocalUser -name $userName
 

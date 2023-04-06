@@ -1,6 +1,6 @@
 . (Join-Path $PSScriptRoot .\Switch-PowerPlanConfigs.ps1)
 
-function Get-PlanName() {
+function Get-PlanName {
 	$result = $batteryPowerPlanName
 	
 	if ((Get-WmiObject -Class "BatteryStatus" -Namespace "root\wmi").PowerOnLine) { 
