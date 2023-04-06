@@ -19,4 +19,4 @@ $taskName = "ScriptGeneratedPowerPlanAutoChange"
 $taskTemplatePath = "..\Task\PowerPlanAutoChangeJobTemplate.xml"
 $taskWatchListPath = "..\Resources\processes.json"
 
-$queryWrapper = "*[EventData[Data[@Name='NewProcessName' or @Name='ProcessName']=`r`n          '{0}']]"
+$queryWrapper = "*[EventData[Data[@Name=`"NewProcessName`" or @Name=`"ProcessName`"]=`r`n          `"{0}`"]]"
