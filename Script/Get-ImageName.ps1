@@ -1,8 +1,8 @@
-. (Join-Path $PSScriptRoot .\Switch-PowerPlanConfigs.ps1)
+. (Join-Path $PSScriptRoot .\Use-ApplicationConfigs.ps1)
 
 function Get-ImageName ($planName) {
 	switch ($planName) {
-		$highPowerPlanName { return $highPowerPlanImageName }
+		$priorityPowerPlanName { return $priorityPowerPlanImageName }
 		$pluggedInPowerPlanName { return $pluggedInPowerPlanImageName }
 		$batteryPowerPlanName { return $batteryPowerPlanImageName }
 	}

@@ -1,5 +1,5 @@
-. (Join-Path $PSScriptRoot .\Switch-PowerPlanConfigs.ps1)
-. (Join-Path $PSScriptRoot .\Get-HighPowerPlanProcessNames.ps1)
+. (Join-Path $PSScriptRoot .\Use-ApplicationConfigs.ps1)
+. (Join-Path $PSScriptRoot .\Get-PriorityPowerPlanProcessNames.ps1)
 
 function Get-PlanName {
 	$result = $batteryPowerPlanName
@@ -8,12 +8,12 @@ function Get-PlanName {
 		$result = $pluggedInPowerPlanName 
 	}
 	
-	$highPowerPlanProcessNames = Get-HighPowerPlanProcessNames
+	$priorityPowerPlanProcessNames = Get-PriorityPowerPlanProcessNames
 
 	foreach ($process in Get-Process) {
-		foreach ($regex in $highPowerPlanProcessNames) {
+		foreach ($regex in $priorityPowerPlanProcessNames) {
 			if ($process.ProcessName -match $regex) {
-				return $highPowerPlanName
+				return $priorityPowerPlanName
 			}
 		}
 	}

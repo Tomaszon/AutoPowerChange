@@ -1,21 +1,21 @@
-$userName = ((Get-WMIObject -Class "Win32_ComputerSystem").UserName -Split "\\")[1]
-
 $enabled = $true
 $executionPolicyAfterExecution = "Restricted"
 
-$highPowerPlanName = "Powa"
+$priorityPowerPlanName = "Powa"
 $pluggedInPowerPlanName = "Balanced"
 $batteryPowerPlanName = "Balanced"
 
-$highPowerPlanImageName = "high"
+$priorityPowerPlanImageName = "high"
 $pluggedInPowerPlanImageName = "med"
 $batteryPowerPlanImageName = "med"
 
 $toastHeader = "Power mode changing..."
 $toastContent = "Power mode changed to '{0}' :3"
-$toastIconFolder = "C:\Users\$userName\Documents\GitHub\AutoPowerChange\Resources"
+$toastIconFolder = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Resources"
 
-$taskName = "ScriptGeneratedPowerPlanAutoChange"
+$screenBrightnessChangeDelay = 2000
+
+$taskName = "AutoPowerChange"
 $taskTemplatePath = "..\Task\PowerPlanAutoChangeJobTemplate.xml"
 $taskWatchListPath = "..\Resources\processes.json"
 
