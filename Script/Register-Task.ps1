@@ -1,10 +1,17 @@
 . (Join-Path $PSScriptRoot .\Switch-PowerPlanConfigs.ps1)
+. (Join-Path $PSScriptRoot .\Get-HighPowerPlanProcesses.ps1)
 
 function Register-Task {
 	$hashTable = Get-Content $taskWatchListPath | Out-String | ConvertFrom-Json
+	
+	# if ($property.Value -match "\\*$") {
+	# 	Get-ChildItem -Path $property.Value -Include "*.exe" -Name -Recurse 
+	# }
+		
+	$highPowerPlanProcesses = Get-HighPowerPlanProcesses
 
-	foreach ($property in $hashTable.PSObject.Properties) {
-		$formatted = $queryWrapper.Replace('{0}', $property.Value)
+	foreach ($process in $highPowerPlanProcesses) {
+		$formatted = $queryWrapper.Replace("{0}", $process)
 		$apps += "$formatted`r`n        or`r`n        " 
 	}
 

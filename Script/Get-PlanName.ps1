@@ -1,4 +1,5 @@
 . (Join-Path $PSScriptRoot .\Switch-PowerPlanConfigs.ps1)
+. (Join-Path $PSScriptRoot .\Get-HighPowerPlanProcessNames.ps1)
 
 function Get-PlanName {
 	$result = $batteryPowerPlanName
@@ -7,16 +8,10 @@ function Get-PlanName {
 		$result = $pluggedInPowerPlanName 
 	}
 	
-	$jsonObject = Get-Content $taskWatchListPath | Out-String | ConvertFrom-Json
-	
-	$highPowerPlanProcesses = @()
-	
-	foreach ($property in $jsonObject.PSObject.Properties) {
-		$highPowerPlanProcesses += $property.Name
-	}
+	$highPowerPlanProcessNames = Get-HighPowerPlanProcessNames
 
 	foreach ($process in Get-Process) {
-		foreach ($regex in $highPowerPlanProcesses) {
+		foreach ($regex in $highPowerPlanProcessNames) {
 			if ($process.ProcessName -match $regex) {
 				return $highPowerPlanName
 			}

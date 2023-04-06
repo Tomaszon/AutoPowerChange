@@ -17,7 +17,7 @@ if ($enabled) {
 
 		$previousGuid = $previousPlan.InstanceID.Replace("Microsoft:PowerPlan\{", "").Replace("}", "")
 
-		if ($guid -ne $previousGuid) {
+		# if ($guid -ne $previousGuid) {
 			$brightness = Get-ScreenBrightness
 
 			Switch-PowerPlan $guid $planName
@@ -25,9 +25,9 @@ if ($enabled) {
 			Start-Sleep 2
 			
 			Set-ScreenBrightness $brightness
-		}
+		# }
 		
-		Set-ExecutionPolicy $executionPolicyAfterExecution
+		# Set-ExecutionPolicy $executionPolicyAfterExecution
 
 		Register-Task
 	}
