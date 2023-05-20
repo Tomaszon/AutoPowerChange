@@ -17,12 +17,12 @@ function Get-PlanName {
 	if ((Get-WmiObject -Class "BatteryStatus" -Namespace "root\wmi").PowerOnLine) { 
 		$result = $pluggedInPowerPlanName 
 		
-		Start-Sleep -Milliseconds $chargeRateCheckDelay
+		if($usePriorityPowerPlanOnLowChargeRate) {
+			Start-Sleep -Milliseconds $chargeRateCheckDelay
 
-		$lowChargeRateDetected = (Get-WmiObject -Class "BatteryStatus" -Namespace "root\wmi").ChargeRate -lt $lowChargeRateThreshold;
-
-		if($usePriorityPowerPlanOnLowChargeRate -and $lowChargeRateDetected) {
-			$result = $priorityPowerPlanName
+			if((Get-WmiObject -Class "BatteryStatus" -Namespace "root\wmi").ChargeRate -lt $lowChargeRateThreshold) {
+				$result = $priorityPowerPlanName
+			}
 		}
 	}
 

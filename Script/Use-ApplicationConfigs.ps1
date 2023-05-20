@@ -1,7 +1,7 @@
 $enabled = $true
 $executionPolicyAfterExecution = "Restricted"
 
-$usePriorityPowerPlanOnLowChargeRate = $true
+$usePriorityPowerPlanOnLowChargeRate = $false
 $lowChargeRateThreshold = 28000
 $chargeRateCheckDelay = 90000
 
