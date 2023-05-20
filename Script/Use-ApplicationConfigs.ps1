@@ -1,6 +1,10 @@
 $enabled = $true
 $executionPolicyAfterExecution = "Restricted"
 
+$usePriorityPowerPlanOnLowChargeRate = $true
+$lowChargeRateThreshold = 28000
+$chargeRateCheckDelay = 90000
+
 $priorityPowerPlanName = "Powa"
 $pluggedInPowerPlanName = "Balanced"
 $batteryPowerPlanName = "Balanced"
