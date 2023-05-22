@@ -10,6 +10,8 @@ function Show-Toast ($planName, $imageName) {
 	
 	$icon = "$toastIconFolder\$imageName.png".Replace("{0}", $userName)
 
+	$currentLocation = (Get-Location).Path
+
 	$template = @"
 	<toast>
 		<visual>
@@ -22,6 +24,7 @@ function Show-Toast ($planName, $imageName) {
 
 		<actions>
 			<action activationType="background" arguments="dismiss" content="Dismiss" />
+			<action activationType="protocol" arguments="powershell://$currentLocation\Invoke-PowerPlanRestore.ps1 -guid $previousPlanGuid -planName $previousPlanName" content="Restore plan" />
 		</actions>
 	</toast>
 "@

@@ -2,12 +2,14 @@
 . (Join-Path $PSScriptRoot .\Get-ImageName.ps1)
 . (Join-Path $PSScriptRoot .\Show-Toast.ps1)
 
-function Switch-PowerPlan ($guid, $planName) {
+function Switch-PowerPlan ($guid, $planName, $showToast) {
 	powercfg /setactive $guid
 		
 	$imageName = Get-ImageName $planName
 		
-	Show-Toast $planName $imageName
+	if($showToast) {
+		Show-Toast $planName $imageName 
+	}
 
 	Write-Host "Power plan changed"
 }
