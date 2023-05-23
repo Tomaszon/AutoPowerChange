@@ -9,6 +9,6 @@
 
 	<actions>
 		<action activationType="background" arguments="dismiss" content="Dismiss" />
-		<action activationType="protocol" arguments="powershell://{currentLocation}\Invoke-PowerPlanRestore.ps1 -guid '{previousPlanGuid}' -planName '{previousPlanName}'" content="Restore plan" />
+		<action activationType="protocol" arguments="apc://{currentLocation}\Invoke-PowerPlanRestore.ps1{1}{2} {previousPlanGuid} {previousPlanName}" content="Restore plan" />
 	</actions>
 </toast>

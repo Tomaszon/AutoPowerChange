@@ -13,11 +13,11 @@ if ($enabled) {
 
 	$guid = $plan.InstanceID.Replace("Microsoft:PowerPlan\{", "").Replace("}", "")
 
-	if ($guid -ne $previousGuid) {
+	# if ($guid -ne $previousPlanGuid) {
 		Complete-PowerPlanChange $guid $planName $true
-	}
+	# }
 	
-	Set-ExecutionPolicy $executionPolicyAfterExecution
+	# Set-ExecutionPolicy $executionPolicyAfterExecution
 
 	Register-Task
 

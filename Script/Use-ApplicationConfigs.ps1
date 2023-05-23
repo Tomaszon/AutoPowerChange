@@ -16,6 +16,7 @@ $batteryPowerPlanImageName = "med"
 $toastHeader = "Power mode changing..."
 $toastContent = "Power mode changed to '{0}' :3"
 $toastIconFolder = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Resources"
+$toastTemplateFolder = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Resources"
 
 $screenBrightnessChangeDelay = 2000
 

@@ -11,5 +11,5 @@ function Switch-PowerPlan ($guid, $planName, $showToast) {
 		Show-Toast $planName $imageName 
 	}
 
-	Write-Host "Power plan changed"
+	Write-Host "Power plan changed to $planName"
 }
