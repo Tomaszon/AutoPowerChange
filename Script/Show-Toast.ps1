@@ -12,22 +12,8 @@ function Show-Toast ($planName, $imageName) {
 
 	$currentLocation = (Get-Location).Path
 
-	$template = @"
-	<toast>
-		<visual>
-			<binding template="ToastGeneric">
-				<text hint-maxLines="1">$toastHeader</text>
-				<text>$content</text>
-				<image placement="appLogoOverride" hint-crop="circle" src="$icon"/>
-			</binding>
-		</visual>
-
-		<actions>
-			<action activationType="background" arguments="dismiss" content="Dismiss" />
-			<action activationType="protocol" arguments="powershell://$currentLocation\Invoke-PowerPlanRestore.ps1 -guid $previousPlanGuid -planName $previousPlanName" content="Restore plan" />
-		</actions>
-	</toast>
-"@
+	$template = Get-Content "..\Resources\toastTemplate.xml" | Out-String
+	$template = $template.Replace("{toastHeader}", $toastHeader).Replace("{content}", $content).Replace("{icon}", $icon).Replace("{currentLocation}", $currentLocation).Replace("{previousPlanGuid}", $previousPlanGuid).Replace("{previousPlanName}", $previousPlanName)
 
 	$xml = New-Object Windows.Data.Xml.Dom.XmlDocument
 	$xml.LoadXml($template)
