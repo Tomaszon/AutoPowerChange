@@ -18,5 +18,5 @@ function Register-Task {
 
 	Register-ScheduledTask -TaskName $taskName -Xml $template -Force
 
-	Write-Host "Task reregistered"
+	Write-Host "Task registered"
 }

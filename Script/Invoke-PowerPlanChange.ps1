@@ -2,7 +2,9 @@
 . (Join-Path $PSScriptRoot .\Use-ApplicationVariables.ps1)
 . (Join-Path $PSScriptRoot .\Get-PlanName.ps1)
 . (Join-Path $PSScriptRoot .\Register-Task.ps1)
-. (Join-Path $PSScriptRoot .\Complete-PowerPlanChange.ps1)
+. (Join-Path $PSScriptRoot .\Get-ScreenBrightness.ps1)
+. (Join-Path $PSScriptRoot .\Set-ScreenBrightness.ps1)
+. (Join-Path $PSScriptRoot .\Switch-PowerPlan.ps1)
 
 if ($enabled) {
 	Write-Host "Execution started"
@@ -13,11 +15,17 @@ if ($enabled) {
 
 	$guid = $plan.InstanceID.Replace("Microsoft:PowerPlan\{", "").Replace("}", "")
 
-	# if ($guid -ne $previousPlanGuid) {
-		Complete-PowerPlanChange $guid $planName $true
-	# }
+	if ($guid -ne $previousPlanGuid) {
+		$brightness = Get-ScreenBrightness
+
+		Switch-PowerPlan $guid $planName $true
+
+		Start-Sleep -Milliseconds $screenBrightnessChangeDelay
+
+		Set-ScreenBrightness $brightness
+	}
 	
-	# Set-ExecutionPolicy $executionPolicyAfterExecution
+	Set-ExecutionPolicy $executionPolicyAfterExecution -Scope CurrentUser
 
 	Register-Task
 

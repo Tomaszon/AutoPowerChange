@@ -1,5 +1,13 @@
-echo %1
-echo %2
-echo %3
+@echo off
 
-powershell start-process powershell -verb runas '%1'.Replace('apc://', '').Replace('{1}', '-guid %2').Replace('{2}', '-planName %3'.Trim('/'))
+powershell Set-ExecutionPolicy Bypass -Scope CurrentUser
+
+for /f "usebackq delims=" %%i in (`
+  powershell -c "'%1'.Replace('apc://', '')"
+`) do set filePath=%%i
+
+for /f "usebackq delims=" %%i in (`
+  powershell -c "'%3'.Trim('/')"
+`) do set planName=%%i
+
+PowerShell -NoLogo -WindowStyle hidden -NoProfile -Command "& {Start-Process PowerShell -ArgumentList '-NoProfile -NoLogo -WindowStyle hidden -File """"%filePath%"""" -guid """"%2"""" -planName """"%planName%"""" ' -Verb RunAs}";

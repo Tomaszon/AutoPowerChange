@@ -15,12 +15,8 @@ function Show-Toast ($planName, $imageName) {
 	$template = Get-Content "$toastTemplateFolder\toastTemplate.xml".Replace("{0}", $userName) | Out-String
 	$template = $template.Replace("{toastHeader}", $toastHeader).Replace("{content}", $content).Replace("{icon}", $icon).Replace("{currentLocation}", $currentLocation).Replace("{previousPlanGuid}", $previousPlanGuid).Replace("{previousPlanName}", $previousPlanName)
 
-	write-host $template
-	
 	$xml = New-Object Windows.Data.Xml.Dom.XmlDocument
 	$xml.LoadXml($template)
 	$toast = New-Object Windows.UI.Notifications.ToastNotification $xml
 	[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($appId).Show($toast)
-
-	# powershell -NoProfile -NoLogo -WindowStyle hidden -Command "start-process powershell -verb runas '%1'.Replace('powershell://', '').Trim('/')"
 }

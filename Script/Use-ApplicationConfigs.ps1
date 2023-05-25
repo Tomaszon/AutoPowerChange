@@ -1,7 +1,7 @@
 $enabled = $true
 $executionPolicyAfterExecution = "Restricted"
 
-$usePriorityPowerPlanOnLowChargeRate = $false
+$usePriorityPowerPlanOnLowChargeRate = $true
 $lowChargeRateThreshold = 28000
 $chargeRateCheckDelay = 90000
 
@@ -17,6 +17,8 @@ $toastHeader = "Power mode changing..."
 $toastContent = "Power mode changed to '{0}' :3"
 $toastIconFolder = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Resources"
 $toastTemplateFolder = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Resources"
+
+$protocolHandlerCommandTemplate = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Script\restore.bat %1 %2 %3";
 
 $screenBrightnessChangeDelay = 2000
 
