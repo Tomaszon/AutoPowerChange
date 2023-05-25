@@ -7,4 +7,6 @@ Register-Task
 
 Register-APCProtocolHandler
 
+Set-ExecutionPolicy $executionPolicyAfterExecution -Scope CurrentUser
+
 Write-Host "Init ended"

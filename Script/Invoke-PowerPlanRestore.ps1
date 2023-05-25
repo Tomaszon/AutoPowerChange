@@ -1,14 +1,14 @@
 param($guid, $planName)
 
 . (Join-Path $PSScriptRoot .\Use-ApplicationConfigs.ps1)
-. (Join-Path $PSScriptRoot .\Switch-PowerPlan.ps1)
+. (Join-Path $PSScriptRoot .\Switch-PowerPlanWrapper.ps1)
 
 if ($enabled) {	
 	Write-Host "Restore started"
 
-	Switch-PowerPlan $guid $planName $false
-	
-	Set-ExecutionPolicy $executionPolicyAfterExecution -Scope CurrentUser
+	$previousPlan = Get-CimInstance -Name "root\cimv2\power" -Class "win32_PowerPlan" -Filter "IsActive=True"
+
+	Switch-PowerPlanWrapper $guid $previousPlan $planName
 
 	Write-Host "Restore ended"
 }

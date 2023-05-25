@@ -5,7 +5,7 @@
 [Windows.UI.Notifications.ToastNotification, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
 [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
 
-function Show-Toast ($planName, $imageName) {
+function Show-Toast ($planName, $imageName, $previousPlanGuid, $previousPlanName) {
 	$content = $toastContent.Replace("{0}", $planName)
 	
 	$icon = "$toastIconFolder\$imageName.png".Replace("{0}", $userName)
