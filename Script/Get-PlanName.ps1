@@ -1,7 +1,7 @@
 . (Join-Path $PSScriptRoot .\Use-ApplicationConfigs.ps1)
 . (Join-Path $PSScriptRoot .\Get-PriorityPowerPlanProcessNames.ps1)
 
-function Get-PlanName($recurse) {
+function Get-PlanName ($recurse, $reason) {
 	$result = $batteryPowerPlanName
 	
 	$priorityPowerPlanProcessNames = Get-PriorityPowerPlanProcessNames
@@ -14,17 +14,19 @@ function Get-PlanName($recurse) {
 		}
 	}
 	
-	if ((Get-WmiObject -Class "BatteryStatus" -Namespace "root\wmi").PowerOnLine) { 
+	$batteryStatus = Get-WmiObject -Class "BatteryStatus" -Namespace "root\wmi"
+
+	if ($batteryStatus.PowerOnLine) { 
 		$result = $pluggedInPowerPlanName 
 		
-		if($usePriorityPowerPlanOnLowChargeRate) {
-			if($recurse) {
+		if ($reason -eq $acReasonValue -and $usePriorityPowerPlanOnLowChargeRate) {
+			if ($recurse) {
 				Start-Sleep -Milliseconds $chargeRateCheckDelay
 				
-				$result = Get-PlanName $false
+				$result = Get-PlanName $false $reason
 			}
 			else {
-				if((Get-WmiObject -Class "BatteryStatus" -Namespace "root\wmi").ChargeRate -lt $lowChargeRateThreshold) {
+				if($batteryStatus.ChargeRate -gt 0 -and $batteryStatus.ChargeRate -lt $lowChargeRateThreshold) {
 					$result = $priorityPowerPlanName
 				}
 			}

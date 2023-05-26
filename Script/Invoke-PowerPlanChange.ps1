@@ -1,3 +1,5 @@
+param($reason)
+
 . (Join-Path $PSScriptRoot .\Use-ApplicationConfigs.ps1)
 . (Join-Path $PSScriptRoot .\Use-ApplicationVariables.ps1)
 . (Join-Path $PSScriptRoot .\Get-PlanName.ps1)
@@ -7,9 +9,11 @@
 if ($enabled) {
 	Write-Host "Execution started"
 
-	Start-Sleep -Milliseconds $triggerDelay
+	if($reason -eq $acReasonValue) {
+		Start-Sleep -Milliseconds $triggerDelay
+	}
 
-	$planName = Get-PlanName $true
+	$planName = Get-PlanName $true $reason
 
 	$plan = Get-CimInstance -Name "root\cimv2\power" -Class "win32_PowerPlan" -Filter "ElementName = '$planName'"
 
@@ -19,7 +23,7 @@ if ($enabled) {
 
 	Switch-PowerPlanWrapper $planGuid $previousPlan $planName $true
 
-	Register-Task
+	Register-Task $psTaskName $psTaskTemplatePath
 
 	Write-Host "Execution completed"
 }

@@ -2,7 +2,7 @@
 . (Join-Path $PSScriptRoot .\Set-ScreenBrightness.ps1)
 . (Join-Path $PSScriptRoot .\Switch-PowerPlan.ps1)
 
-function Switch-PowerPlanWrapper($planGuid, $previousPlan, $planName, $showToast) {
+function Switch-PowerPlanWrapper ($planGuid, $previousPlan, $planName, $showToast) {
 	$previousPlanName = $previousPlan.ElementName
 	
 	$previousPlanGuid = $previousPlan.InstanceID.Replace("Microsoft:PowerPlan\{", "").Replace("}", "")
@@ -17,5 +17,5 @@ function Switch-PowerPlanWrapper($planGuid, $previousPlan, $planName, $showToast
 		Set-ScreenBrightness $brightness
 	}
 
-	Set-ExecutionPolicy $executionPolicyAfterExecution -Scope CurrentUser
+	Set-ExecutionPolicy $executionPolicyAfterExecution CurrentUser
 }

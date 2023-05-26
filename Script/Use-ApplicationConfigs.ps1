@@ -1,6 +1,7 @@
 $enabled = $true
 $triggerDelay = 5000
 $executionPolicyAfterExecution = "Restricted"
+$acReasonValue = "acChange"
 
 $usePriorityPowerPlanOnLowChargeRate = $true
 $lowChargeRateThreshold = 28000
@@ -23,8 +24,11 @@ $protocolHandlerCommandTemplate = "C:\Users\{0}\Documents\GitHub\AutoPowerChange
 
 $screenBrightnessChangeDelay = 2000
 
-$taskName = "AutoPowerChange"
-$taskTemplatePath = "..\Task\PowerPlanAutoChangeJobTemplate.xml"
+$acTaskName = "AutoPowerChangeAC"
+$acTaskTemplatePath = "..\Task\PowerPlanAutoChangeACJobTemplate.xml"
+
+$psTaskName = "AutoPowerChangePS"
+$psTaskTemplatePath = "..\Task\PowerPlanAutoChangePSJobTemplate.xml"
 $taskWatchListPath = "..\Resources\processes.json"
 
 $queryWrapper = "*[EventData[Data[@Name=`"NewProcessName`" or @Name=`"ProcessName`"]=`r`n          `"{0}`"]]"
