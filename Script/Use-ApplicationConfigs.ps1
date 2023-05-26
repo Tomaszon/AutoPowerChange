@@ -1,4 +1,5 @@
 $enabled = $true
+$triggerDelay = 5000
 $executionPolicyAfterExecution = "Restricted"
 
 $usePriorityPowerPlanOnLowChargeRate = $true

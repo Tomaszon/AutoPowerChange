@@ -7,7 +7,9 @@
 if ($enabled) {
 	Write-Host "Execution started"
 
-	$planName = Get-PlanName
+	Start-Sleep -Milliseconds $triggerDelay
+
+	$planName = Get-PlanName $true
 
 	$plan = Get-CimInstance -Name "root\cimv2\power" -Class "win32_PowerPlan" -Filter "ElementName = '$planName'"
 
