@@ -3,10 +3,6 @@ $triggerDelay = 5000
 $executionPolicyAfterExecution = "Restricted"
 $acReasonValue = "acChange"
 
-$usePriorityPowerPlanOnLowChargeRate = $true
-$lowChargeRateThreshold = 28000
-$chargeRateCheckDelay = 90000
-
 $priorityPowerPlanName = "Powa"
 $pluggedInPowerPlanName = "Balanced"
 $batteryPowerPlanName = "Balanced"

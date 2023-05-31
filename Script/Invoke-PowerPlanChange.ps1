@@ -13,7 +13,7 @@ if ($enabled) {
 		Start-Sleep -Milliseconds $triggerDelay
 	}
 
-	$planName = Get-PlanName $true $reason
+	$planName = Get-PlanName $reason
 
 	$plan = Get-CimInstance -Name "root\cimv2\power" -Class "win32_PowerPlan" -Filter "ElementName = '$planName'"
 
