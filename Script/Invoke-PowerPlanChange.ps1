@@ -5,6 +5,8 @@ param($reason)
 . (Join-Path $PSScriptRoot .\Get-PlanName.ps1)
 . (Join-Path $PSScriptRoot .\Register-Task.ps1)
 . (Join-Path $PSScriptRoot .\Switch-PowerPlanWrapper.ps1)
+. (Join-Path $PSScriptRoot .\Add-CDSTypeDefinition.ps1)
+. (Join-Path $PSScriptRoot .\Set-ScreenResolution.ps1)
 
 if ($enabled) {
 	Write-Host "Execution started"
@@ -12,6 +14,12 @@ if ($enabled) {
 	if($reason -eq $acReasonValue) {
 		Start-Sleep -Milliseconds $triggerDelay
 	}
+	
+	# test
+	Add-CDSTypeDefinition
+
+	Set-ScreenResolution $standardScreenResolution.width $standardScreenResolution.height
+	# end test
 
 	$planName = Get-PlanName $reason
 

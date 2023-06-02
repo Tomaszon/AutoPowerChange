@@ -3,6 +3,15 @@ $triggerDelay = 5000
 $executionPolicyAfterExecution = "Restricted"
 $acReasonValue = "acChange"
 
+$priorityAppScreenResolution = [PSCustomObject]@{ 
+	width = 1920
+	height = 1200 
+}
+$standardScreenResolution = [PSCustomObject]@{ 
+	width = 3840
+	height = 2400 
+}
+
 $priorityPowerPlanName = "Powa"
 $pluggedInPowerPlanName = "Balanced"
 $batteryPowerPlanName = "Balanced"
