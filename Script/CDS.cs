@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using Microsoft.Win32;
 
 namespace cds
 {
@@ -23,11 +24,14 @@ namespace cds
 
 		[FieldOffset(120)]
 		public int dmDisplayFrequency;
+
+		[FieldOffset(126)]
+		public int Dpi;
 	}
 
 	public class Helper
 	{
-		public static DEVMODE GetDisplaySettings()
+		public static DEVMODE GetDisplaySettings(string displayId)
 		{
 			var devMode = new DEVMODE();
 
@@ -37,22 +41,33 @@ namespace cds
 				throw new Exception("can't get resolution from win api");
 			}
 
+			devMode.Dpi = GetDPI(displayId);
+
 			return devMode;
 		}
 
-		public static string ChangeDisplaySettings(int width, int height, Flags flags)
+		public static string ChangeDisplaySettings(int width, int height, int dpi, string displayId, Flags flags)
 		{
-			var devMode = GetDisplaySettings();
+			var devMode = GetDisplaySettings(displayId);
 
-			if (devMode.dmPelsHeight == height && devMode.dmPelsWidth == width)
+			if (devMode.dmPelsHeight == height && devMode.dmPelsWidth == width && devMode.Dpi == dpi)
 			{
 				return "Settings did not change. Current and target resolutions are the same.";
 			}
 
+			//TODO get from config or whatever
+			devMode.dmPelsWidth = 1920;
+			devMode.dmPelsHeight = 1200;
+
+			var res = ChangeDisplaySettings(ref devMode, (int)flags);
+
+			ChangeDPI(dpi, displayId);
+
 			devMode.dmPelsWidth = width;
 			devMode.dmPelsHeight = height;
 
-			var res = ChangeDisplaySettings(ref devMode, (int)flags);
+			res = ChangeDisplaySettings(ref devMode, (int)flags);
+
 			switch (res)
 			{
 				case 0:
@@ -74,6 +89,30 @@ namespace cds
 				default:
 					return "unknow return code: " + res;
 			}
+		}
+
+		public static void ChangeDPI(int dpi, string displayId)
+		{
+			var key = GetRegistryKey(displayId);
+
+			key.SetValue("DpiValue", dpi);
+		}
+
+		public static int GetDPI(string displayId)
+		{
+			var key = GetRegistryKey(displayId);
+
+			return (int)key.GetValue("DpiValue");
+		}
+
+		private static RegistryKey GetRegistryKey(string displayId)
+		{
+			RegistryKey key = Registry.CurrentUser.OpenSubKey("Control Panel", true);
+
+			key = key.OpenSubKey("Desktop", true);
+			key = key.OpenSubKey("PerMonitorSettings", true);
+
+			return key.OpenSubKey(displayId, true);
 		}
 
 		[DllImport("user32.dll")]

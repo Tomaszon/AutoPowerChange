@@ -1,5 +1,6 @@
 # Source code from https://github.com/lust4life/display-resolution
 # CDS.cs modified to be compiled
+# TODO make dpi and reschange work together on the same display
 [Flags()] enum CDSFlags {
 	Dynamically = 0
 	UpdateRegistry = 0x01
@@ -11,6 +12,6 @@
 	NoReset = 0x10000000
 }
 
-function Set-ScreenResolution ([int] $width ,[int] $height, [CDSFlags] $flag = [CDSFlags]::Dynamically) {
-	[cds.Helper]::ChangeDisplaySettings($width, $height, $flag)
+function Set-ScreenResolution ([int] $width ,[int] $height, [string] $dpi, [CDSFlags] $flag = [CDSFlags]::Dynamically) {
+	[cds.Helper]::ChangeDisplaySettings($width, $height, $dpi, $displayId, $flag)
 }

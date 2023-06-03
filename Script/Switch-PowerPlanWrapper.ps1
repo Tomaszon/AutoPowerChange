@@ -2,7 +2,7 @@
 . (Join-Path $PSScriptRoot .\Set-ScreenBrightness.ps1)
 . (Join-Path $PSScriptRoot .\Switch-PowerPlan.ps1)
 
-function Switch-PowerPlanWrapper ($planGuid, $previousPlan, $planName, $showToast) {
+function Switch-PowerPlanWrapper ($reason, $planGuid, $previousPlan, $planName, $showToast) {
 	$previousPlanName = $previousPlan.ElementName
 	
 	$previousPlanGuid = $previousPlan.InstanceID.Replace("Microsoft:PowerPlan\{", "").Replace("}", "")
@@ -11,6 +11,17 @@ function Switch-PowerPlanWrapper ($planGuid, $previousPlan, $planName, $showToas
 		$brightness = Get-ScreenBrightness
 
 		Switch-PowerPlan $planGuid $planName $previousPlanGuid $previousPlanName $showToast
+
+		if ($reason -ne $acReasonValue -and $changeDisplayResolution) {
+			Add-CDSTypeDefinition
+			
+			if ($planName -eq $priorityPowerPlanName) {
+				Set-ScreenResolution $priorityAppScreenResolution.width $priorityAppScreenResolution.height $priorityAppScreenResolution.dpi
+			}
+			else {
+				Set-ScreenResolution $standardScreenResolution.width $standardScreenResolution.height $standardScreenResolution.dpi
+			}
+		}
 
 		Start-Sleep -Milliseconds $screenBrightnessChangeDelay
 

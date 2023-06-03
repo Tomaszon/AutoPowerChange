@@ -8,7 +8,7 @@ if ($enabled) {
 
 	$previousPlan = Get-CimInstance -Name "root\cimv2\power" -Class "win32_PowerPlan" -Filter "IsActive=True"
 
-	Switch-PowerPlanWrapper $guid $previousPlan $planName
+	Switch-PowerPlanWrapper $null $guid $previousPlan $planName
 
 	Write-Host "Restore ended"
 }
