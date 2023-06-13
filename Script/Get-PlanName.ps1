@@ -1,7 +1,7 @@
 . (Join-Path $PSScriptRoot .\Use-ApplicationConfigs.ps1)
 . (Join-Path $PSScriptRoot .\Get-PriorityPowerPlanProcessNames.ps1)
 
-function Get-PlanName ($reason) {
+function Get-PlanName {
 	$priorityPowerPlanProcessNames = Get-PriorityPowerPlanProcessNames
 	
 	foreach ($process in Get-Process) {

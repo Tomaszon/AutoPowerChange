@@ -41,13 +41,15 @@ namespace cds
 				throw new Exception("can't get resolution from win api");
 			}
 
-			devMode.Dpi = GetDPI(displayId);
+			// devMode.Dpi = GetDPI(displayId);
 
 			return devMode;
 		}
 
-		public static string ChangeDisplaySettings(int width, int height, int dpi, string displayId, Flags flags)
+		public static string ChangeDisplaySettings(int width, int height, int dpi, string displayId)
 		{
+			Flags flags = Flags.CDS_DYNAMICALLY;
+
 			var devMode = GetDisplaySettings(displayId);
 
 			if (devMode.dmPelsHeight == height && devMode.dmPelsWidth == width && devMode.Dpi == dpi)
@@ -56,17 +58,17 @@ namespace cds
 			}
 
 			//TODO get from config or whatever
-			devMode.dmPelsWidth = 1920;
-			devMode.dmPelsHeight = 1200;
+			// devMode.dmPelsWidth = 1024;
+			// devMode.dmPelsHeight = 768;
 
-			var res = ChangeDisplaySettings(ref devMode, (int)flags);
+			// var res = ChangeDisplaySettings(ref devMode, (int)flags);
 
-			ChangeDPI(dpi, displayId);
+			// ChangeDPI(dpi, displayId);
 
 			devMode.dmPelsWidth = width;
 			devMode.dmPelsHeight = height;
 
-			res = ChangeDisplaySettings(ref devMode, (int)flags);
+			var res = ChangeDisplaySettings(ref devMode, (int)flags);
 
 			switch (res)
 			{
@@ -75,7 +77,7 @@ namespace cds
 				case 1:
 					return "The computer must be restarted for the graphics mode to work.";
 				case -1:
-					return "The display driver failed the specified graphics mode.";
+					return "The display driver failed";
 				case -2:
 					return "The graphics mode is not supported.";
 				case -3:
@@ -124,6 +126,7 @@ namespace cds
 		[Flags]
 		public enum Flags : int
 		{
+			CDS_DYNAMICALLY = 0x00,
 			CDS_UPDATEREGISTRY = 0x01,
 			CDS_TEST = 0x02,
 			CDS_FULLSCREEN = 0x04,

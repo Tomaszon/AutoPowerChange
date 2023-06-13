@@ -12,6 +12,6 @@
 	NoReset = 0x10000000
 }
 
-function Set-ScreenResolution ([int] $width ,[int] $height, [string] $dpi, [CDSFlags] $flag = [CDSFlags]::Dynamically) {
-	[cds.Helper]::ChangeDisplaySettings($width, $height, $dpi, $displayId, $flag)
+function Set-ScreenResolution ([int] $width ,[int] $height, [int] $dpi) {
+	[cds.Helper]::ChangeDisplaySettings($width, $height, $dpi, $displayId)
 }

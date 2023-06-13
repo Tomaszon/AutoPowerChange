@@ -10,7 +10,7 @@ param($reason)
 if ($enabled) {
 	Write-Host "Execution started"
 	
-	$planName = Get-PlanName $reason
+	$planName = Get-PlanName
 
 	if ($reason -eq $acReasonValue) {
 		Start-Sleep -Milliseconds $triggerDelay
@@ -22,7 +22,7 @@ if ($enabled) {
 
 	$previousPlan = Get-CimInstance -Name "root\cimv2\power" -Class "win32_PowerPlan" -Filter "IsActive=True"
 
-	Switch-PowerPlanWrapper $reason $planGuid $previousPlan $planName $true
+	Switch-PowerPlanWrapper $planGuid $previousPlan $planName $true
 
 	Register-Task $psTaskName $psTaskTemplatePath
 
