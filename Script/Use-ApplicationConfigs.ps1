@@ -1,4 +1,4 @@
-$enabled = $false
+$enabled = $true
 $triggerDelay = 5000
 $executionPolicyAfterExecution = "Restricted"
 $acReasonValue = "acChange"
@@ -28,21 +28,23 @@ $batteryPowerPlan = [PSCustomObject]@{
 	imageName = "med"
 }
 
-$toastHeader = "Power mode changing..."
-$toastContent = "Power mode changed to '{0}' :3"
-$toastIconFolder = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Resources"
-$toastTemplateFolder = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Resources"
+$toast = [PSCustomObject]@{
+	header = "Power mode changing..."
+	content = "Power mode changed to '{0}' :3"
+	iconFolder = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Resources"
+	templateFolder = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Resources"
+}
 
 $protocolHandlerCommandTemplate = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Script\execute.bat %1 %2 %3";
 
 $screenBrightnessChangeDelay = 2000
 
 $acTask = [PSCustomObject]@{
-	name = "AutoPowerChangeAC",
+	name = "AutoPowerChangeAC"
 	templatePath = "..\Task\PowerPlanAutoChangeACJobTemplate.xml"
 }
 $psTask = [PSCustomObject]@{
-	name = "AutoPowerChangePS",
+	name = "AutoPowerChangePS"
 	templatePath = "..\Task\PowerPlanAutoChangePSJobTemplate.xml"
 }
 
