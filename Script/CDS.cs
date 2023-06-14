@@ -41,7 +41,7 @@ namespace cds
 				throw new Exception("can't get resolution from win api");
 			}
 
-			// devMode.Dpi = GetDPI(displayId);
+			devMode.Dpi = GetDPI(displayId);
 
 			return devMode;
 		}
@@ -57,13 +57,7 @@ namespace cds
 				return "Settings did not change. Current and target resolutions are the same.";
 			}
 
-			//TODO get from config or whatever
-			// devMode.dmPelsWidth = 1024;
-			// devMode.dmPelsHeight = 768;
-
-			// var res = ChangeDisplaySettings(ref devMode, (int)flags);
-
-			// ChangeDPI(dpi, displayId);
+			ChangeDPI(dpi, displayId);
 
 			devMode.dmPelsWidth = width;
 			devMode.dmPelsHeight = height;

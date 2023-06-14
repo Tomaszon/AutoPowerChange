@@ -1,12 +1,14 @@
+param($planName)
+
 . (Join-Path $PSScriptRoot .\Use-ApplicationConfigs.ps1)
 . (Join-Path $PSScriptRoot .\Set-ScreenResolution.ps1)
 . (Join-Path $PSScriptRoot .\Add-CDSTypeDefinition.ps1)
 . (Join-Path $PSScriptRoot .\Get-PlanName.ps1)
 
 if ($enabled) {	
-	Add-CDSTypeDefinition
+	Write-Host "Change started"
 
-	$planName = Get-PlanName
+	Add-CDSTypeDefinition
 
 	if ($planName -eq $priorityPowerPlanName) {
 		Set-ScreenResolution $priorityAppScreenResolution.width $priorityAppScreenResolution.height $priorityAppScreenResolution.dpi
@@ -14,4 +16,6 @@ if ($enabled) {
 	else {
 		Set-ScreenResolution $standardScreenResolution.width $standardScreenResolution.height $standardScreenResolution.dpi
 	}
+	
+	Write-Host "Change ended"
 }

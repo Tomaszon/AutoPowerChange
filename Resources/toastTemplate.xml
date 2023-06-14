@@ -9,7 +9,7 @@
 
 	<actions>
 		<action activationType="background" arguments="dismiss" content="Dismiss" />
-		<action activationType="protocol" arguments="apc://{currentLocation}\Invoke-ScreenResolutionChange.ps1" content="Change resolution" />
-		<action activationType="protocol" arguments="apc://{currentLocation}\Invoke-PowerPlanRestore.ps1 {previousPlanGuid} {previousPlanName}" content="Restore plan" />
+		<action activationType="protocol" arguments="apc://{currentLocation}\Invoke-ScreenResolutionChange.ps1 {planName}" content="Change resolution" />
+		<action activationType="protocol" arguments="apc://{currentLocation}\Invoke-PowerPlanRestore.ps1 {previousPlanName} {previousPlanGuid}" content="Restore plan" />
 	</actions>
 </toast>
