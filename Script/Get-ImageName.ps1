@@ -2,8 +2,8 @@
 
 function Get-ImageName ($planName) {
 	switch ($planName) {
-		$priorityPowerPlanName { return $priorityPowerPlanImageName }
-		$pluggedInPowerPlanName { return $pluggedInPowerPlanImageName }
-		$batteryPowerPlanName { return $batteryPowerPlanImageName }
+		$priorityPowerPlan.name { return $priorityPowerPlan.imageName }
+		$pluggedInPowerPlan.name { return $pluggedInPowerPlan.imageName }
+		$batteryPowerPlan.name { return $batteryPowerPlan.imageName }
 	}
 }

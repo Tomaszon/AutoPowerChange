@@ -1,27 +1,32 @@
-$enabled = $true
+$enabled = $false
 $triggerDelay = 5000
 $executionPolicyAfterExecution = "Restricted"
 $acReasonValue = "acChange"
 
 $displayId = "SDC416B0_0B_07E5_71^E0ABBA6C319DE3519B0BCA2F155631F8"
-$priorityAppScreenResolution = [PSCustomObject]@{ 
+$priorityAppScreenResolution = [PSCustomObject]@{
 	width = 1920
 	height = 1200
 	dpi = -1
 }
-$standardScreenResolution = [PSCustomObject]@{ 
+$standardScreenResolution = [PSCustomObject]@{
 	width = 3840
 	height = 2400
 	dpi = -2
 }
 
-$priorityPowerPlanName = "Powa"
-$pluggedInPowerPlanName = "Balanced"
-$batteryPowerPlanName = "Balanced"
-
-$priorityPowerPlanImageName = "high"
-$pluggedInPowerPlanImageName = "med"
-$batteryPowerPlanImageName = "med"
+$priorityPowerPlan = [PSCustomObject]@{
+	name = "Powa"
+	imageName = "high"
+}
+$pluggedInPowerPlan = [PSCustomObject]@{
+	name = "Balanced"
+	imageName = "med"
+}
+$batteryPowerPlan = [PSCustomObject]@{
+	name = "Balanced"
+	imageName = "med"
+}
 
 $toastHeader = "Power mode changing..."
 $toastContent = "Power mode changed to '{0}' :3"
@@ -32,11 +37,15 @@ $protocolHandlerCommandTemplate = "C:\Users\{0}\Documents\GitHub\AutoPowerChange
 
 $screenBrightnessChangeDelay = 2000
 
-$acTaskName = "AutoPowerChangeAC"
-$acTaskTemplatePath = "..\Task\PowerPlanAutoChangeACJobTemplate.xml"
+$acTask = [PSCustomObject]@{
+	name = "AutoPowerChangeAC",
+	templatePath = "..\Task\PowerPlanAutoChangeACJobTemplate.xml"
+}
+$psTask = [PSCustomObject]@{
+	name = "AutoPowerChangePS",
+	templatePath = "..\Task\PowerPlanAutoChangePSJobTemplate.xml"
+}
 
-$psTaskName = "AutoPowerChangePS"
-$psTaskTemplatePath = "..\Task\PowerPlanAutoChangePSJobTemplate.xml"
 $taskWatchListPath = "..\Resources\processes.json"
 
 $queryWrapper = "*[EventData[Data[@Name=`"NewProcessName`" or @Name=`"ProcessName`"]=`r`n          `"{0}`"]]"

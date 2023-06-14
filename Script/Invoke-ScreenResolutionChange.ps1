@@ -10,7 +10,7 @@ if ($enabled) {
 
 	Add-CDSTypeDefinition
 
-	if ($planName -eq $priorityPowerPlanName) {
+	if ($planName -eq $priorityPowerPlan.name) {
 		Set-ScreenResolution $priorityAppScreenResolution.width $priorityAppScreenResolution.height $priorityAppScreenResolution.dpi
 	}
 	else {

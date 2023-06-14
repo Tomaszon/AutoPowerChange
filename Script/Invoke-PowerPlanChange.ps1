@@ -24,7 +24,7 @@ if ($enabled) {
 
 	Switch-PowerPlanWrapper $planGuid $previousPlan $planName $true
 
-	Register-Task $psTaskName $psTaskTemplatePath
+	Register-Task $psTask.name $psTask.templatePath
 
 	Write-Host "Execution completed"
 }

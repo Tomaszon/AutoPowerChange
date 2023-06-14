@@ -4,9 +4,9 @@
 
 Write-Host "Init started"
 
-Register-Task $acTaskName $acTaskTemplatePath $acReasonValue
+Register-Task $acTask.name $acTask.templatePath $acReasonValue
 
-Register-Task $psTaskName $psTaskTemplatePath
+Register-Task $psTask.name $psTask.templatePath
 
 Register-APCProtocolHandler
 

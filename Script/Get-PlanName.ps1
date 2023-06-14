@@ -7,14 +7,14 @@ function Get-PlanName {
 	foreach ($process in Get-Process) {
 		foreach ($regex in $priorityPowerPlanProcessNames) {
 			if ($process.ProcessName -match $regex) {
-				return $priorityPowerPlanName
+				return $priorityPowerPlan.name
 			}
 		}
 	}
 	
 	if ((Get-WmiObject -Class "BatteryStatus" -Namespace "root\wmi").PowerOnLine) { 
-		return $pluggedInPowerPlanName 		
+		return $pluggedInPowerPlan.name 		
 	}
 
-	return $batteryPowerPlanName
+	return $batteryPowerPlan.name
 }
