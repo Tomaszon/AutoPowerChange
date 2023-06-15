@@ -22,7 +22,7 @@ if ($enabled) {
 
 	$previousPlan = Get-CimInstance -Name "root\cimv2\power" -Class "win32_PowerPlan" -Filter "IsActive=True"
 
-	Switch-PowerPlanWrapper $planGuid $previousPlan $planName $true
+	Switch-PowerPlanWrapper $reason $planGuid $previousPlan $planName $true
 
 	Register-Task $psTask.name $psTask.templatePath
 

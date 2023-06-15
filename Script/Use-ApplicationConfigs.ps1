@@ -51,3 +51,5 @@ $psTask = [PSCustomObject]@{
 $taskWatchListPath = "..\Resources\processes.json"
 
 $queryWrapper = "*[EventData[Data[@Name=`"NewProcessName`" or @Name=`"ProcessName`"]=`r`n          `"{0}`"]]"
+
+$resolutionButtonTemplate = "<action activationType=`"protocol`" arguments=`"apc://{currentLocation}\Invoke-ScreenResolutionChange.ps1 {planName}`" content=`"Change to {w}x{h}`" imageUri=`"{iconFolder}\resolution.png`"/>"
