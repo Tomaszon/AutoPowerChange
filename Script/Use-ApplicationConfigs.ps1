@@ -6,7 +6,7 @@ $acReasonValue = "acChange"
 $displayId = "SDC416B0_0B_07E5_71^E0ABBA6C319DE3519B0BCA2F155631F8"
 $priorityAppScreenResolution = [PSCustomObject]@{
 	width = 1920
-	height = 1200
+	height = 1080
 	dpi = -1
 }
 $standardScreenResolution = [PSCustomObject]@{
@@ -31,9 +31,9 @@ $batteryPowerPlan = [PSCustomObject]@{
 $toast = [PSCustomObject]@{
 	header = "Power mode changing..."
 	content = "Power mode changed to '{0}' :3"
-	iconFolder = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Resources"
-	templateFolder = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Resources"
 }
+
+$resourceFolder = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Resources"
 
 $protocolHandlerCommandTemplate = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Script\execute.bat %1 %2 %3";
 
@@ -52,4 +52,4 @@ $taskWatchListPath = "..\Resources\processes.json"
 
 $queryWrapper = "*[EventData[Data[@Name=`"NewProcessName`" or @Name=`"ProcessName`"]=`r`n          `"{0}`"]]"
 
-$resolutionButtonTemplate = "<action activationType=`"protocol`" arguments=`"apc://{currentLocation}\Invoke-ScreenResolutionChange.ps1 {planName}`" content=`"Change to {w}x{h}`" imageUri=`"{iconFolder}\resolution.png`"/>"
+$resolutionButtonTemplate = "<action activationType=`"protocol`" arguments=`"apc://{currentLocation}\Invoke-ScreenResolutionChange.ps1 {planName}`" content=`"Change to {w}x{h}`" imageUri=`"{resourceFolder}\resolution.png`"/>"

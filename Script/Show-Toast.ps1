@@ -9,12 +9,12 @@
 function Show-Toast ($reason, $planName, $imageName, $previousPlanGuid, $previousPlanName) {
 	$content = $toast.content.Replace("{0}", $planName)
 	
-	$iconFolder = $toast.iconFolder.Replace("{0}", $userName)
-	$icon = "$iconFolder\$imageName.png"
+	$resourceFolder = $resourceFolder.Replace("{0}", $userName)
+	$image = "$resourceFolder\$imageName.png"
 
 	$currentLocation = (Get-Location).Path
 
-	$template = Get-Content "$($toast.templateFolder)\toastTemplate.xml".Replace("{0}", $userName) | Out-String
+	$template = Get-Content "$resourceFolder\toastTemplate.xml".Replace("{0}", $userName) | Out-String
 
 	if ($planName -eq $priorityPowerPlan.name) {
 		$width = $priorityAppScreenResolution.width
@@ -22,7 +22,7 @@ function Show-Toast ($reason, $planName, $imageName, $previousPlanGuid, $previou
 	}
 	else {
 		$width = $standardScreenResolution.width
-		$height = $standardScreenResolution.height	
+		$height = $standardScreenResolution.height
 	}
 
 	$resolutionButton = $resolutionButtonTemplate.Replace("{w}", $width).Replace("{h}", $height)
@@ -36,10 +36,7 @@ function Show-Toast ($reason, $planName, $imageName, $previousPlanGuid, $previou
 		$template = $template.Replace("{resolutionButton}", $resolutionButton)
 	}
 
-	$template = $template.Replace("{toastHeader}", $toast.header).Replace("{content}", $content).Replace("{icon}", $icon).Replace("{currentLocation}", $currentLocation).Replace("{previousPlanGuid}", $previousPlanGuid).Replace("{previousPlanName}", $previousPlanName).Replace("{planName}", $planName).Replace("{iconFolder}", $iconFolder)
-
-
-	Write-Host $template
+	$template = $template.Replace("{toastHeader}", $toast.header).Replace("{content}", $content).Replace("{image}", $image).Replace("{currentLocation}", $currentLocation).Replace("{previousPlanGuid}", $previousPlanGuid).Replace("{previousPlanName}", $previousPlanName).Replace("{planName}", $planName).Replace("{resourceFolder}", $resourceFolder)
 
 	$xml = New-Object Windows.Data.Xml.Dom.XmlDocument
 	$xml.LoadXml($template)
