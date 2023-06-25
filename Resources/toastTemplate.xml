@@ -3,6 +3,7 @@
 		<binding template="ToastGeneric">
 			<text hint-maxLines="1">{toastHeader}</text>
 			<text>{content}</text>
+			<text>{reason}</text>
 			<image placement="appLogoOverride" hint-crop="circle" src="{image}"/>
 		</binding>
 	</visual>

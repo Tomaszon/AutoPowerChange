@@ -1,6 +1,7 @@
 . (Join-Path $PSScriptRoot .\Use-ApplicationConfigs.ps1)
 . (Join-Path $PSScriptRoot .\Use-ApplicationVariables.ps1)
 . (Join-Path $PSScriptRoot .\Get-ScreenResolution.ps1)
+. (Join-Path $PSScriptRoot .\Get-CurrentPriorityProcessNames.ps1)
 
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
 [Windows.UI.Notifications.ToastNotification, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
@@ -34,6 +35,13 @@ function Show-Toast ($reason, $planName, $imageName, $previousPlanGuid, $previou
 	}
 	else {
 		$template = $template.Replace("{resolutionButton}", $resolutionButton)
+	}
+
+	if ($reason -eq $acReasonValue) {
+		$template = $template.Replace("{reason}", "AC changed")
+	}
+	else {
+		$template = $template.Replace("{reason}", (Get-CurrentPriorityProcessNames))
 	}
 
 	$template = $template.Replace("{toastHeader}", $toast.header).Replace("{content}", $content).Replace("{image}", $image).Replace("{currentLocation}", $currentLocation).Replace("{previousPlanGuid}", $previousPlanGuid).Replace("{previousPlanName}", $previousPlanName).Replace("{planName}", $planName).Replace("{resourceFolder}", $resourceFolder)
