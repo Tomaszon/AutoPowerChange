@@ -4,7 +4,7 @@
 
 function Switch-PowerPlan ($reason, $guid, $planName, $previousPlanGuid, $previousPlanName, $showToast) {
 	powercfg /setactive $guid
-		
+
 	if ($showToast) {
 		$imageName = Get-ImageName $planName
 		

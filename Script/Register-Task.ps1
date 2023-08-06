@@ -3,8 +3,10 @@
 . (Join-Path $PSScriptRoot .\Use-ApplicationVariables.ps1)
 
 function Register-Task ($taskName, $taskTemplatePath, $params) {
-	foreach ($process in (Get-PriorityPowerPlanProcesses).PSObject.Properties) {
-		$formatted = $queryWrapper.Replace("{0}", $process.Value)
+	$processes = (Get-PriorityPowerPlanProcesses).PSObject.Properties | foreach { $_.Value }
+
+	foreach ($process in $processes) {
+		$formatted = $queryWrapper.Replace("{0}", $process)
 		$apps += "$formatted`r`n        or`r`n        " 
 	}
 

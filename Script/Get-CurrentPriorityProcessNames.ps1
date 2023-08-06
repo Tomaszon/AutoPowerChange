@@ -3,9 +3,11 @@
 function Get-CurrentPriorityProcessNames {
 	$processNames = @()
 
+	$regexes = (Get-PriorityPowerPlanProcesses).PSObject.Properties | foreach { $_.Name }
+
 	foreach ($process in Get-Process) {
-		foreach ($regex in (Get-PriorityPowerPlanProcesses).PSObject.Properties) {
-			if ($process.Description -match $regex.Name) {
+		foreach ($regex in $regexes) {
+			if ($process.ProcessName -match $regex) {
 				$processNames = $processNames + $process.ProcessName
 			}
 		}
