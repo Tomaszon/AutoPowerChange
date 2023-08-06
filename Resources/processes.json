@@ -1,5 +1,5 @@
 {
-	"minecraft": "C:\\XboxGames\\Minecraft Launcher\\Content\\Minecraft.exe",
+	"Minecraft": "C:\\XboxGames\\Minecraft Launcher\\Content\\Minecraft.exe",
 	"wgc$": "C:\\Program Files (x86)\\Wargaming.net\\GameCenter\\wgc.exe",
-	"^launcher$" : "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Warframe\\Tools\\Launcher.exe"
+	"^steam$": "C:\\Program Files (x86)\\Steam\\steam.exe"
 }
