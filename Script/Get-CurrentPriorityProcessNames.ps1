@@ -1,13 +1,11 @@
-. (Join-Path $PSScriptRoot .\Get-PriorityPowerPlanProcessNames.ps1)
+. (Join-Path $PSScriptRoot .\Get-PriorityPowerPlanProcesses.ps1)
 
 function Get-CurrentPriorityProcessNames {
-	$priorityPowerPlanProcessNames = Get-PriorityPowerPlanProcessNames
-
 	$processNames = @()
 
 	foreach ($process in Get-Process) {
-		foreach ($regex in $priorityPowerPlanProcessNames) {
-			if ($process.ProcessName -match $regex) {
+		foreach ($regex in (Get-PriorityPowerPlanProcesses).PSObject.Properties) {
+			if ($process.Description -match $regex.Name) {
 				$processNames = $processNames + $process.ProcessName
 			}
 		}

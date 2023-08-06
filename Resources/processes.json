@@ -1,4 +1,5 @@
-[
-	"C:\\XboxGames\\Minecraft Launcher\\Content\\Minecraft.exe",
-	"C:\\Program Files (x86)\\Wargaming.net\\GameCenter\\wgc.exe"
-]
+{
+	"Minecraft": "C:\\XboxGames\\Minecraft Launcher\\Content\\Minecraft.exe",
+	"Wargaming\\.net Game Center": "C:\\Program Files (x86)\\Wargaming.net\\GameCenter\\wgc.exe",
+	"Warframe Launcher" : "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Warframe\\Tools\\Launcher.exe"
+}

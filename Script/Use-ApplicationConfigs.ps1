@@ -6,7 +6,7 @@ $acReasonValue = "acChange"
 $displayId = "SDC416B0_0B_07E5_71^E0ABBA6C319DE3519B0BCA2F155631F8"
 $priorityAppScreenResolution = [PSCustomObject]@{
 	width = 1920
-	height = 1080
+	height = 1200
 	dpi = -1
 }
 $standardScreenResolution = [PSCustomObject]@{

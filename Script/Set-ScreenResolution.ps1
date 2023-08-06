@@ -13,5 +13,10 @@
 }
 
 function Set-ScreenResolution ([int] $width ,[int] $height, [int] $dpi) {
-	[cds.Helper]::ChangeDisplaySettings($width, $height, $dpi, $displayId)
+	# [cds.Helper]::ChangeDisplaySettings($width, $height, $dpi, $displayId)
+	setresolution set -w $width -h $height -noprompt
+
+	start-sleep 5
+
+	setresolution set -w $width -h $height -noprompt
 }
