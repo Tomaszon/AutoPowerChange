@@ -7,9 +7,9 @@ Automatically changes power plan
   + High power app launch/termination
 * Compensates screen brightness change
 * Shows toast notification on trigger
-* Reregisters task on trigger to apply high power app list changes
-  + Can be configured in processes.json as "filePath" array
-  + Folders can be included ending with \\*, every .exe file will be included recursively
+* Suggests resolution based on selected power plan
+* Reregisters task on trigger to apply high power app list changes 
+  + Can be configured in processes.json as "processNameRegex": "filePath" dictionary
   + Scheduled Task Trigger supports filters with only finite complexity
 * Sets script execution policy after execution based on config
 
@@ -18,4 +18,4 @@ Local Security Policy -> Local Policies -> Audit Policy -> Audit process trackin
 
 All used Windows power plan must be created manually before execution
 
-Must be executed manually at the first time to create the scheduled task 
+Initialize-APC must be executed manually at the first time to create the scheduled tasks
