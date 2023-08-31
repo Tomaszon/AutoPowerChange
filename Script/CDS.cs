@@ -24,9 +24,6 @@ namespace cds
 
 		[FieldOffset(120)]
 		public int dmDisplayFrequency;
-
-		[FieldOffset(126)]
-		public int Dpi;
 	}
 
 	public class Helper
@@ -38,31 +35,34 @@ namespace cds
 			var retCode = EnumDisplaySettings(null, -1, ref devMode);
 			if (retCode == 0)
 			{
-				throw new Exception("can't get resolution from win api");
+				throw new Exception("Can't get resolution from win api");
 			}
-
-			devMode.Dpi = GetDPI(displayId);
 
 			return devMode;
 		}
 
-		public static string ChangeDisplaySettings(int width, int height, int dpi, string displayId)
+		public static string ChangeDisplaySettings(int width, int height, int dpi, string id, string index)
 		{
-			Flags flags = Flags.CDS_DYNAMICALLY;
+			var devMode = GetDisplaySettings(id);
 
-			var devMode = GetDisplaySettings(displayId);
-
-			if (devMode.dmPelsHeight == height && devMode.dmPelsWidth == width && devMode.Dpi == dpi)
+			if (devMode.dmPelsHeight == height && devMode.dmPelsWidth == width)
 			{
 				return "Settings did not change. Current and target resolutions are the same.";
 			}
 
-			ChangeDPI(dpi, displayId);
+			var displayKey = GetDisplayRegistryKey(id, index);
+
+			displayKey.SetValue("PrimSurfSize.cx", width);
+			displayKey.SetValue("PrimSurfSize.cy", height);
+
+			var dpiKey = GetDPIRegistryKey(id);
+
+			dpiKey.SetValue("DpiValue", dpi);
 
 			devMode.dmPelsWidth = width;
 			devMode.dmPelsHeight = height;
 
-			var res = ChangeDisplaySettings(ref devMode, (int)flags);
+			var res = ChangeDisplaySettings(ref devMode, 0x00);
 
 			switch (res)
 			{
@@ -87,21 +87,20 @@ namespace cds
 			}
 		}
 
-		public static void ChangeDPI(int dpi, string displayId)
+		private static RegistryKey GetDisplayRegistryKey(string displayId, string displayIndex)
 		{
-			var key = GetRegistryKey(displayId);
+			var key = Registry.LocalMachine.OpenSubKey("SYSTEM", true);
 
-			key.SetValue("DpiValue", dpi);
+			key = key.OpenSubKey("CurrentControlSet", true);
+			key = key.OpenSubKey("Control", true);
+			key = key.OpenSubKey("GraphicsDrivers", true);
+			key = key.OpenSubKey("Configuration", true);
+			key = key.OpenSubKey(displayId, true);
+
+			return key.OpenSubKey(displayIndex, true);
 		}
 
-		public static int GetDPI(string displayId)
-		{
-			var key = GetRegistryKey(displayId);
-
-			return (int)key.GetValue("DpiValue");
-		}
-
-		private static RegistryKey GetRegistryKey(string displayId)
+		private static RegistryKey GetDPIRegistryKey(string displayId)
 		{
 			RegistryKey key = Registry.CurrentUser.OpenSubKey("Control Panel", true);
 
@@ -116,18 +115,5 @@ namespace cds
 
 		[DllImport("user32.dll")]
 		private static extern int ChangeDisplaySettings(ref DEVMODE devMode, int flags);
-
-		[Flags]
-		public enum Flags : int
-		{
-			CDS_DYNAMICALLY = 0x00,
-			CDS_UPDATEREGISTRY = 0x01,
-			CDS_TEST = 0x02,
-			CDS_FULLSCREEN = 0x04,
-			CDS_GLOBAL = 0x08,
-			CDS_SET_PRIMARY = 0x10,
-			CDS_RESET = 0x40000000,
-			CDS_NORESET = 0x10000000
-		}
 	}
 }

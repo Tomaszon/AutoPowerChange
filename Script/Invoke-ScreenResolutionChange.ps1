@@ -11,10 +11,10 @@ if ($enabled) {
 	Add-CDSTypeDefinition
 
 	if ($planName -eq $priorityPowerPlan.name) {
-		Set-ScreenResolution $priorityAppScreenResolution.width $priorityAppScreenResolution.height $priorityAppScreenResolution.dpi
+		Set-ScreenResolution $priorityAppScreenResolution.width $priorityAppScreenResolution.height $priorityAppScreenResolution.dpi $priorityAppScreenResolution.id $priorityAppScreenResolution.index
 	}
 	else {
-		Set-ScreenResolution $standardScreenResolution.width $standardScreenResolution.height $standardScreenResolution.dpi
+		Set-ScreenResolution $standardScreenResolution.width $standardScreenResolution.height $standardScreenResolution.dpi $standardScreenResolution.id $standardScreenResolution.index
 	}
 	
 	Write-Host "Change ended"

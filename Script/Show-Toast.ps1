@@ -20,15 +20,19 @@ function Show-Toast ($reason, $planName, $imageName, $previousPlanGuid, $previou
 	if ($planName -eq $priorityPowerPlan.name) {
 		$width = $priorityAppScreenResolution.width
 		$height = $priorityAppScreenResolution.height
+		$displayId = $priorityAppScreenResolution.id
+		$displayIndex = $priorityAppScreenResolution.index
 	}
 	else {
 		$width = $standardScreenResolution.width
 		$height = $standardScreenResolution.height
+		$displayId = $standardScreenResolution.id
+		$displayIndex = $standardScreenResolution.index
 	}
 
 	$resolutionButton = $resolutionButtonTemplate.Replace("{w}", $width).Replace("{h}", $height)
 
-	$resolution = Get-ScreenResolution
+	$resolution = Get-ScreenResolution $displayId $displayIndex
 
 	if ($reason -eq $acReasonValue -or $resolution.width -eq $width -and $resolution.height -eq $height) {
 		$template = $template.Replace("{resolutionButton}", $null)

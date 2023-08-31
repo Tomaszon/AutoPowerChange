@@ -3,16 +3,19 @@ $triggerDelay = 5000
 $executionPolicyAfterExecution = "Restricted"
 $acReasonValue = "acChange"
 
-$displayId = "SDC416B0_0B_07E5_71^E0ABBA6C319DE3519B0BCA2F155631F8"
 $priorityAppScreenResolution = [PSCustomObject]@{
+	id = "SDC416B0_0B_07E5_71^E0ABBA6C319DE3519B0BCA2F155631F8"
+	index = "00"
 	width = 1920
 	height = 1200
-	dpi = -1
+	dpi = 0
 }
 $standardScreenResolution = [PSCustomObject]@{
+	id = "SDC416B0_0B_07E5_71^E0ABBA6C319DE3519B0BCA2F155631F8"
+	index = "00"
 	width = 3840
 	height = 2400
-	dpi = -2
+	dpi = 0
 }
 
 $priorityPowerPlan = [PSCustomObject]@{

@@ -11,6 +11,5 @@ function Register-APCProtocolHandler {
 	New-ItemProperty -Path HKCR:\APC -Name "URL Protocol" -Force
 	Set-ItemProperty -Path $regPath -Name '(Default)' -Value $command -Force
 	Set-ItemProperty -Path HKCR:\APC -Name '(Default)' -Value 'URL:APC Protocol' -Force
-
 	Write-Host "Registry keys registered"
 }
