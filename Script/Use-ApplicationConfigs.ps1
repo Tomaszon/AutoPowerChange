@@ -21,14 +21,17 @@ $standardScreenResolution = [PSCustomObject]@{
 $priorityPowerPlan = [PSCustomObject]@{
 	name = "Powa"
 	imageName = "high"
+	leftHanded = $false
 }
 $pluggedInPowerPlan = [PSCustomObject]@{
 	name = "Balanced"
 	imageName = "med"
+	leftHanded = $true
 }
 $batteryPowerPlan = [PSCustomObject]@{
 	name = "Balanced"
 	imageName = "med"
+	leftHanded = $true
 }
 
 $toast = [PSCustomObject]@{
@@ -40,7 +43,8 @@ $resourceFolder = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Resources"
 
 $protocolHandlerCommandTemplate = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Script\execute.bat %1 %2 %3";
 
-$screenBrightnessChangeDelay = 2000
+$screenBrightnessChangeDelay = 2500
+$screenResolutionChangeDelay = 5000
 
 $acTask = [PSCustomObject]@{
 	name = "AutoPowerChangeAC"

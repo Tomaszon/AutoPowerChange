@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
 
-namespace cds
+namespace CDS
 {
 	[StructLayout(LayoutKind.Explicit)]
 	public struct DEVMODE
@@ -28,6 +28,12 @@ namespace cds
 
 	public class Helper
 	{
+		[DllImport("user32.dll")]
+		private static extern int EnumDisplaySettings(string deviceName, int modeNum, ref DEVMODE devMode);
+
+		[DllImport("user32.dll")]
+		private static extern int ChangeDisplaySettings(ref DEVMODE devMode, int flags);
+
 		public static DEVMODE GetDisplaySettings(string displayId)
 		{
 			var devMode = new DEVMODE();
@@ -109,11 +115,5 @@ namespace cds
 
 			return key.OpenSubKey(displayId, true);
 		}
-
-		[DllImport("user32.dll")]
-		private static extern int EnumDisplaySettings(string deviceName, int modeNum, ref DEVMODE devMode);
-
-		[DllImport("user32.dll")]
-		private static extern int ChangeDisplaySettings(ref DEVMODE devMode, int flags);
 	}
 }
