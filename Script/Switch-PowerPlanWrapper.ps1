@@ -1,7 +1,7 @@
 . (Join-Path $PSScriptRoot .\Get-ScreenBrightness.ps1)
 . (Join-Path $PSScriptRoot .\Set-ScreenBrightness.ps1)
 . (Join-Path $PSScriptRoot .\Switch-PowerPlan.ps1)
-. (Join-Path $PSScriptRoot .\Add-CDSTypeDefinition.ps1)
+. (Join-Path $PSScriptRoot .\Set-MousePrimaryButton.ps1)
 
 function Switch-PowerPlanWrapper ($reason, $planGuid, $previousPlan, $planName, $showToast) {
 	$previousPlanName = $previousPlan.ElementName
@@ -14,6 +14,9 @@ function Switch-PowerPlanWrapper ($reason, $planGuid, $previousPlan, $planName, 
 		Switch-PowerPlan $reason $planGuid $planName $previousPlanGuid $previousPlanName $showToast
 
 		Start-Sleep -Milliseconds $screenBrightnessChangeDelay
+
+		# TODO move to a proper place, can not run from here
+		# Set-MousePrimaryButton $planName
 
 		Set-ScreenBrightness $brightness
 	}

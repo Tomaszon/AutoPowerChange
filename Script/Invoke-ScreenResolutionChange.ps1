@@ -3,10 +3,11 @@ param($planName)
 . (Join-Path $PSScriptRoot .\Use-ApplicationConfigs.ps1)
 . (Join-Path $PSScriptRoot .\Set-ScreenResolution.ps1)
 . (Join-Path $PSScriptRoot .\Add-CDSTypeDefinition.ps1)
-
+. (Join-Path $PSScriptRoot .\Set-MousePrimaryButton.ps1)
 if ($enabled) {	
-	Write-Host "Change started"
-
+	# TODO move to a proper place
+	Set-MousePrimaryButton $planName
+	
 	Add-CDSTypeDefinition
 
 	if ($planName -eq $priorityPowerPlan.name) {
@@ -16,5 +17,5 @@ if ($enabled) {
 		Set-ScreenResolution $standardScreenResolution.width $standardScreenResolution.height $standardScreenResolution.dpi $standardScreenResolution.id $standardScreenResolution.index
 	}
 	
-	Write-Host "Change ended"
+	Write-Host "Screen resolution set"
 }
