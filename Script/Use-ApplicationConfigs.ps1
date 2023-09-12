@@ -41,7 +41,7 @@ $toast = [PSCustomObject]@{
 
 $resourceFolder = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Resources"
 
-$protocolHandlerCommandTemplate = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Script\execute.bat %1 %2 %3";
+$protocolHandlerCommandTemplate = "C:\Users\{0}\Documents\GitHub\AutoPowerChange\Script\execute.bat %1 %2 %3 %4";
 
 $screenBrightnessChangeDelay = 2500
 $screenResolutionChangeDelay = 5000
@@ -59,4 +59,4 @@ $taskWatchListPath = "..\Resources\processes.json"
 
 $queryWrapper = "*[EventData[Data[@Name=`"NewProcessName`" or @Name=`"ProcessName`"]=`r`n          `"{0}`"]]"
 
-$resolutionButtonTemplate = "<action activationType=`"protocol`" arguments=`"apc://{currentLocation}\Invoke-ScreenResolutionChange.ps1 {planName}`" content=`"Change to {w}x{h}`" imageUri=`"{resourceFolder}\resolution.png`"/>"
+$resolutionButtonTemplate = "<action activationType=`"protocol`" arguments=`"apc://{currentLocation}\Invoke-ScreenResolutionChange.ps1 {planName} null {currentLocation}\Invoke-MouseButtonChange.ps1`" content=`"Change to {w}x{h}`" imageUri=`"{resourceFolder}\resolution.png`"/>"

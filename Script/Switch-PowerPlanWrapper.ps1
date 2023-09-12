@@ -15,9 +15,6 @@ function Switch-PowerPlanWrapper ($reason, $planGuid, $previousPlan, $planName, 
 
 		Start-Sleep -Milliseconds $screenBrightnessChangeDelay
 
-		# TODO move to a proper place, can not run from here
-		# Set-MousePrimaryButton $planName
-
 		Set-ScreenBrightness $brightness
 	}
 

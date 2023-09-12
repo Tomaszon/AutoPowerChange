@@ -11,6 +11,6 @@
 	<actions>
 		<action activationType="background" arguments="dismiss" content="Dismiss" imageUri="{resourceFolder}\dismiss.png"/>
 		{resolutionButton}
-		<action activationType="protocol" arguments="apc://{currentLocation}\Invoke-PowerPlanRestore.ps1 {previousPlanName} {previousPlanGuid}" content="Restore plan" imageUri="{resourceFolder}\restore.png"/>
+		<action activationType="protocol" arguments="apc://{currentLocation}\Invoke-PowerPlanRestore.ps1 {previousPlanName} {previousPlanGuid} {currentLocation}\Invoke-MouseButtonChange.ps1" content="Restore plan" imageUri="{resourceFolder}\restore.png"/>
 	</actions>
 </toast>
