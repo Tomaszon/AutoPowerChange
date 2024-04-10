@@ -22,16 +22,19 @@ $priorityPowerPlan = [PSCustomObject]@{
 	name = "Powa"
 	imageName = "high"
 	leftHanded = $false
+	batterySaverThreshold = 0
 }
 $pluggedInPowerPlan = [PSCustomObject]@{
 	name = "Balanced"
 	imageName = "med"
-	leftHanded = $true
+	leftHanded = $false
+	batterySaverThreshold = 0
 }
 $batteryPowerPlan = [PSCustomObject]@{
 	name = "Balanced"
 	imageName = "med"
-	leftHanded = $true
+	leftHanded = $false
+	batterySaverThreshold = 100
 }
 
 $toast = [PSCustomObject]@{

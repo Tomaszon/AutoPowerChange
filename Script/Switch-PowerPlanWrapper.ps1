@@ -7,16 +7,14 @@ function Switch-PowerPlanWrapper ($reason, $planGuid, $previousPlan, $planName, 
 	$previousPlanName = $previousPlan.ElementName
 	
 	$previousPlanGuid = $previousPlan.InstanceID.Replace("Microsoft:PowerPlan\{", "").Replace("}", "")
+	
+	$brightness = Get-ScreenBrightness
+	
+	Switch-PowerPlan $reason $planGuid $planName $previousPlanGuid $previousPlanName $showToast
+	
+	Start-Sleep -Milliseconds $screenBrightnessChangeDelay
 
-	if ($planGuid -ne $previousPlanGuid) {
-		$brightness = Get-ScreenBrightness
-
-		Switch-PowerPlan $reason $planGuid $planName $previousPlanGuid $previousPlanName $showToast
-
-		Start-Sleep -Milliseconds $screenBrightnessChangeDelay
-
-		Set-ScreenBrightness $brightness
-	}
+	Set-ScreenBrightness $brightness
 
 	Set-ExecutionPolicy $executionPolicyAfterExecution CurrentUser
 }
