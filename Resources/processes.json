@@ -4,5 +4,6 @@
 	"^steam$": "C:\\Program Files (x86)\\Steam\\steam.exe",
 	"^nox$": "C:\\Program Files\\Nox\\bin\\nox.exe",
 	"^studio$": "C:\\Program Files\\Studio 2.0\\Studio.exe",
-	"^HD-Player$": "C:\\Program Files\\BlueStacks_nxt\\HD-Player.exe"
+	"^HD-Player$": "C:\\Program Files\\BlueStacks_nxt\\HD-Player.exe",
+	"^Games$": "C:\\C:\\Program Files\\GRYPHLINK\\1.0.2\\Games.exe"
 }
